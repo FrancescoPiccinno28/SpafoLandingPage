@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tremor Monitoring - Parkinson's Disease</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --bg-light: #f4f4ff;
+      --text-dark: #1e1e2f;
+      --text-light: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+    }
+
+    .hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      color: white;
+      z-index: 999;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 20px;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4f46e5, #818cf8);
+      color: var(--text-light);
+      padding: 120px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 1.3em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section {
+    border-radius: 25px; /* angoli smussati */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      padding: 100px 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #ffffff;
+      border: 1px solid #e0e0f0;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      animation: slideUp 0.8s ease-in-out;
+    }
+
+    .section-title {
+      font-size: 2.5em;
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .section-content {
+      font-size: 1.2em;
+      line-height: 1.8;
+      text-align: justify;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .image-block {
+      text-align: center;
+      margin-top: 40px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .image-block img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .card {
+      border-radius: 25px; /* angoli smussati */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      padding: 30px;
+      max-width: 400px;
+      flex: 1 1 300px;
+      text-align: center;
+      border: 1px solid #ddd;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 40px;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #2e2e4d;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9em;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div style="font-size: 1.4em; font-weight: bold;">Tremor Monitoring</div>
+    <div>
+      <a href="#overview">Progetto</a>
+      <a href="#architecture">Architettura</a>
+      <a href="#frontend">Frontend</a>
+      <a href="#backend">Backend</a>
+      <a href="#features">Funzionalità</a>
+      <a href="#github">Github</a>
+      <a href="#team">Team</a>
+  
+    </div>
+  </nav>
+
+  <header>
+    <h1>Tremor Monitoring</h1>
+    <p>Piattaforma per il monitoraggio a distanza dei pazienti affetti dal morbo di Parkinson</p>
+  </header>
+
+  <section id="overview">
+    <h2 class="section-title">Il Progetto</h2>
+    <p class="section-content">
+      Tremor Monitoring è un sistema intelligente per il rilevamento continuo dei tremori  nei pazienti affetti da Parkinson.
+      Il progetto si pone l'obiettivo di essere uno strumento per il personale sanitario specializzato, per ottenere statistiche sull'andamento della malattia
+      nel corso del tempo.
+      L'obiettivo principale è stato quello di realizzare un'applicazione il meno invasiva possibile per il paziente, e il quanto più indipendente possibile da una sua interazione.
+      Utilizzando lo <strong>smartwatch Google Pixel 2</strong> si è potuto recuperare i dati sensoriali relativi al movimento del braccio, e tramite un dispositivo gateway come il <strong>Raspberry Pi 5</strong> 
+      questi dati sono stati trasmessi sfruttando il <strong>Bluetooth Low Energy (BLE)</strong> fino al cloud, dove un sistema di intelligenza artificiale
+      ha permesso di classificare il movimento del paziente.
+      Questi dati sono poi stati resi accessibile tramite frontend al personale medico, previa registrazione sulla piattaforma. 
+    </p>
+  </section>
+
+ <section id="architecture" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
+  <div style="flex: 1 1 550px; min-width: 300px;">
+    <h2 class="section-title">Architettura</h2>
+    <p class="section-content">
+      L'architettura si basa su un sistema a microservizi, containerizzati con Docker e comunicanti tramite API RESTful. Il punto di accesso
+      per ogni richiesta è il servizio <strong>API GATEWAY</strong>, fornito da AWS, che si occupa dell'instradamento o di elaborazioni tramite il paradigma serverless e le <strong>Lambda functions</strong>:
+      <br><br>
+      - Backend basato sul framework SpringBoot in Java.<br>
+      - Microservizio per la classificazione del tremore tramite l'uso dell'intelligenza artificiale<br>
+      - Dati archiviati su MongoDB e S3;<br>
+      - Frontend sviluppato in React+Vite<br><br>
+    </p>
+  </div>
+  <div class="image-block" style="flex: 1 1 400px; min-width: 280px;">
+    <img src="img/FullProject.png" alt="Architettura" />
+  </div>
+</section>
+
+ <section id="features" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
+  <!-- Testo a sinistra -->
+  <div style="flex: 1 1 550px; min-width: 300px;">
+    <h2 class="section-title">Funzionalità</h2>
+    <p class="section-content" style="text-align: justify;">
+      Il sistema include login sicuro, una dashboard per visualizzare i pazienti nel sistema, un'interfaccia di controllo per monitorare l'installazione del dispositivo, 
+      e il tracciamento dello storico dei tremori per assistere la diagnosi.
+      Ogni componente è pensato per fornire supporto al medico durante la sua attività lavorativa, lasciando un determinato grado di libertà
+      nella gestione del paziente.
+    </p>
+  </div>
+
+  <!-- Immagine a destra -->
+  <div class="image-block" style="flex: 1 1 400px; min-width: 280px;">
+    <img src="img/tremorPowerScreenDashboard.png" alt="Funzionalità Dashboard">
+  </div>
+</section>
+
+  <section id="frontend">
+    <h2 class="section-title">Frontend</h2>
+    <p class="section-content">
+      L'interfaccia web è stata sviluppata usando React+Vite e distribuita tramite un'istanza sul cloud.
+      Questa permette al medico di visualizzare i parametri relativi ai pazienti, visualizzarne la cartella clinica e eventualmente aggiornarla.
+      Permette inoltre l'aggiunta/rimozione del paziente dal sistema e il monitoraggio dello stato di installazione del dispositivo nell'abitazione
+    </p>
+  
+  </section>
+
+  <section id="backend">
+    <h2 class="section-title">Backend</h2>
+    <p class="section-content">
+      Il backend è composto da 2 microservizi principali, entrambi containerizzati e deployati su architettura cloud:
+      -<strong>User Service</strong>: dedicato alla gestione di pazienti e dottori all'interno del database
+      -<strong>Tremor Analisys</strong>: dedicato all'elaborazione dei dati sensoriali, tramite l'utilizzo di algoritmi di intelligenza artificiale
+      La comunicazione a questi 2 servizi infine è gestita dal servizio AWS di API GATEWAY.
+
+    </p>
+  </section>
+
+ 
+
+
+
+<section id="github" style="text-align: center;">
+  <h2 class="section-title">Github</h2>
+  <p class="section-content" style="text-align: center;">
+    Repository del progetto:
+  </p>
+  <ul style="list-style: none; padding: 0; margin: 30px auto; text-align: center; line-height: 2; font-size: 1.1em;">
+    <li><a href="https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-UserService-PiccinnoFesta" target="_blank" rel="noopener" style="color: #2a9d8f;">User Service</a></li>
+    <li><a href="https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-smartwatch-PiccinnoFesta" target="_blank" rel="noopener" style="color: #2a9d8f;">SmartWatch Service</a></li>
+    <li><a href="https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-BLEserver-PiccinnoFesta" target="_blank" rel="noopener" style="color: #2a9d8f;">Raspberry BLE Server</a></li>
+    <li><a href="https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-TremorAnalysis-PiccinnoFesta" target="_blank" rel="noopener" style="color: #2a9d8f;">Tremor Analysis AI</a></li>
+    <li><a href="https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-Frontend-PiccinnoFesta" target="_blank" rel="noopener" style="color: #2a9d8f;">Frontend</a></li>
+  </ul>
+</section>
+
+
+  <section id="team">
+    <h2 class="section-title">Team</h2>
+    <div class="team-grid">
+      <div class="card">
+        <h3>Francesco Piccinno</h3>
+        <p>Email: francesco.piccinno2@studenti.unisalento.it</p>
+        <p>GitHub: <a href="https://github.com/FrancescoPiccinno54" target="_blank">FrancescoPiccinno54</a></p>
+      </div>
+      <div class="card">
+        <h3>Francesco Festa</h3>
+        <p>Email: francesco.festa@studenti.unisalento.it</p>
+        <p>GitHub: <a href="https://github.com/Triaf17" target="_blank">FrancescoFesta</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Tremor Monitoring - Università del Salento
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      sections.forEach(sec => {
+        sec.classList.add('hidden');
+        observer.observe(sec);
+      });
+    });
+  </script>
+</body>
+</html>
