@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Titolo e favicon -->
   <title>Spafo - Entertainment Lounge</title>
+  <link rel="icon" type="image/png" href="img/Logo-removebg.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
     :root {
-      --primary-color: #00baff;  /* blu neon */
+      --primary-color: #00baff;
       --secondary-color: #0077ff;
       --dark-bg: #0b0e18;
       --medium-bg: #121526;
       --light-text: #e6eaff;
       --muted-text: #aab0c6;
-      --accent-glow: 0 0 15px rgba(0,186,255,0.5);
+      --accent-glow: 0 0 20px rgba(0,186,255,0.5);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -41,25 +41,34 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 40px;
+      padding: 10px 40px;
       z-index: 999;
       box-shadow: 0 2px 15px rgba(0,0,0,0.4);
     }
 
-    .logo {
-      font-size: 1.8em;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-left img {
+      height: 45px;
+      width: auto;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0,186,255,0.4));
+    }
+
+    .nav-left img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 20px rgba(0,186,255,0.7));
     }
 
     .tagline {
-      font-size: 0.8em;
+      font-size: 0.85em;
       color: var(--primary-color);
       font-weight: 500;
-      margin-left: 6px;
+      letter-spacing: 1px;
     }
 
     nav a {
@@ -67,7 +76,7 @@
       text-decoration: none;
       font-weight: 600;
       margin-left: 25px;
-      transition: color 0.3s;
+      transition: color 0.3s, text-shadow 0.3s;
     }
 
     nav a:hover {
@@ -123,6 +132,23 @@
       position: relative;
     }
 
+    /* LOGO FLOTANTE HEADER */
+    .header-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 160px;
+      opacity: 0.1;
+      z-index: 0;
+      animation: logoPulse 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoPulse {
+      from { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+      to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
     /* SEZIONI */
     section {
       padding: 120px 20px;
@@ -140,11 +166,22 @@
       min-width: 300px;
     }
 
-    .section-text h2 {
-      font-size: 2.5em;
+    .section-title {
+      font-size: 2.4em;
       color: var(--primary-color);
-      margin-bottom: 25px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       text-shadow: var(--accent-glow);
+    }
+
+    .section-subtitle {
+      font-size: 1.1em;
+      font-weight: 500;
+      color: var(--muted-text);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .section-text p {
@@ -160,36 +197,21 @@
       position: relative;
       overflow: hidden;
       border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     }
 
     .section-img img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 20px;
-      transition: transform 1.2s ease, opacity 0.6s ease;
-      transform: scale(1.05);
+      display: block;
+      transition: transform 0.6s ease, opacity 0.6s ease;
     }
 
     .section-img:hover img {
-      transform: scale(1.1);
-      opacity: 0.9;
-    }
-
-    .section-img::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
-      z-index: 1;
-    }
-
-    /* Effetto parallax su immagini */
-    .parallax {
-      perspective: 800px;
-    }
-    .parallax img {
-      transform: translateZ(0);
-      will-change: transform;
+      transform: scale(1.05);
+      opacity: 0.95;
     }
 
     .alt-bg {
@@ -207,7 +229,6 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    /* Animazioni on scroll */
     .hidden {
       opacity: 0;
       transform: translateY(40px);
@@ -219,24 +240,35 @@
     }
 
     @media (max-width: 800px) {
-      header h1 {
-        font-size: 3em;
-      }
       nav {
         flex-direction: column;
         align-items: flex-start;
       }
+      .nav-left {
+        margin-bottom: 10px;
+      }
+      header h1 {
+        font-size: 3em;
+      }
       section {
         flex-direction: column;
+      }
+      .section-title {
+        text-align: center;
+      }
+      .header-logo {
+        width: 100px;
+        opacity: 0.15;
       }
     }
   </style>
 </head>
+
 <body>
 
   <nav>
-    <div>
-      <span class="logo">Spafo</span>
+    <div class="nav-left">
+      <img src="img/Logo-removebg.png" alt="Logo Spafo">
       <span class="tagline">Entertainment Lounge</span>
     </div>
     <div>
@@ -248,60 +280,63 @@
   </nav>
 
   <header>
+    <img src="img/Logo-removebg.png" alt="Logo Spafo decorativo" class="header-logo">
     <h1>Spafo</h1>
     <p>Dove la notte incontra l’intrattenimento. Cocktail, cinema, videogiochi e socialità in un’unica esperienza immersiva.</p>
   </header>
 
-  <!-- Cocktail Bar -->
-  <section id="cocktail" class="hidden parallax">
+  <!-- Sezioni invariate -->
+  <section id="cocktail" class="hidden">
     <div class="section-text">
-      <h2>🍸 Cocktail Bar</h2>
+      <h2 class="section-title">Cocktail Bar</h2>
+      <div class="section-subtitle">Eleganza & mixology d’autore</div>
       <p>
         L’atmosfera del nostro bar è pura eleganza contemporanea: luci soffuse, musica chill e drink d’autore preparati con precisione e creatività.
       </p>
     </div>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1601924638867-3ec6b5c8248b?auto=format&fit=crop&w=1000&q=80" alt="Cocktail Bar">
+      <img src="img/CocktailBar.png" alt="Cocktail Bar">
     </div>
   </section>
 
-  <!-- Sala Film -->
-  <section id="film" class="alt-bg hidden parallax">
+  <section id="film" class="alt-bg hidden">
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1601044226721-d6d93d1b4a9c?auto=format&fit=crop&w=1000&q=80" alt="Sala Film">
+      <img src="img/TvRoom.png" alt="Sala Film e TV">
     </div>
     <div class="section-text">
-      <h2>🎬 Sala Film</h2>
+      <h2 class="section-title">Sala Film</h2>
+      <div class="section-subtitle">Cinema privato & relax</div>
       <p>
         Un cinema boutique dove il comfort incontra la qualità. 
-        Proiezioni selezionate, sound immersivo e atmosfera esclusiva.
+        Poltrone comode, maxi schermo e audio avvolgente ti immergono completamente nel film — o nel tuo gioco preferito.
       </p>
     </div>
   </section>
 
-  <!-- Sala Videogiochi -->
-  <section id="games" class="hidden parallax">
+  <section id="games" class="hidden">
     <div class="section-text">
-      <h2>🎮 Sala Videogiochi</h2>
+      <h2 class="section-title">Game Room</h2>
+      <div class="section-subtitle">Adrenalina, luci e divertimento</div>
       <p>
-        Dalle postazioni next-gen alla realtà virtuale, fino agli arcade retrò: una zona dove il tempo si ferma e l’adrenalina sale.
+      Un ambiente dinamico e luminoso dove la competizione incontra lo stile.
+      Tavoli da biliardo, calcio balilla, freccette e canestri si alternano in uno spazio pensato per divertirsi in compagnia, tra risate, sfide e buona musica.
+      La Game Room di Spafo è il cuore dell’energia condivisa: dove ogni partita diventa un’esperienza.
       </p>
     </div>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1587202372775-98927a4a17b2?auto=format&fit=crop&w=1000&q=80" alt="Sala Videogiochi">
+      <img src="img/GameRoom.png" alt="Sala Videogiochi">
     </div>
   </section>
 
-  <!-- Sala Sociale -->
-  <section id="social" class="alt-bg hidden parallax">
+  <section id="social" class="alt-bg hidden">
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80" alt="Sala Sociale">
+      <img src="img/SocialGameRoom.png" alt="Sala Sociale">
     </div>
     <div class="section-text">
-      <h2>💬 Social Room</h2>
+      <h2 class="section-title">Social Lounge</h2>
+      <div class="section-subtitle">Connessioni & momenti autentici</div>
       <p>
-        Spazio conviviale, eventi live, giochi da tavolo e area lounge. 
-        Perfetta per rilassarsi, chiacchierare o incontrare nuove persone in un’atmosfera unica.
+        Spazio conviviale, eventi live, giochi da tavolo e area lounge.
       </p>
     </div>
   </section>
@@ -311,7 +346,6 @@
   </footer>
 
   <script>
-    // Animazioni on scroll
     document.addEventListener('DOMContentLoaded', () => {
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver(entries => {
@@ -322,21 +356,12 @@
           }
         });
       }, { threshold: 0.2 });
-
       sections.forEach(sec => {
         sec.classList.add('hidden');
         observer.observe(sec);
       });
-
-      // Parallax semplice
-      document.addEventListener('scroll', () => {
-        document.querySelectorAll('.parallax img').forEach(img => {
-          const speed = 0.2;
-          const offset = window.scrollY * speed;
-          img.style.transform = `translateY(${offset}px) scale(1.05)`;
-        });
-      });
     });
   </script>
+
 </body>
 </html>
