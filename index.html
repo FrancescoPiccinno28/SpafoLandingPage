@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Titolo e favicon -->
   <title>Spafo - Entertainment Lounge</title>
   <link rel="icon" type="image/png" href="img/Logo-removebg.png">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -55,13 +53,7 @@
     .nav-left img {
       height: 45px;
       width: auto;
-      transition: transform 0.3s ease, filter 0.3s ease;
       filter: drop-shadow(0 0 10px rgba(0,186,255,0.4));
-    }
-
-    .nav-left img:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 20px rgba(0,186,255,0.7));
     }
 
     .tagline {
@@ -71,17 +63,44 @@
       letter-spacing: 1px;
     }
 
+    nav .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
     nav a {
       color: var(--light-text);
       text-decoration: none;
       font-weight: 600;
-      margin-left: 25px;
       transition: color 0.3s, text-shadow 0.3s;
     }
 
     nav a:hover {
       color: var(--primary-color);
       text-shadow: var(--accent-glow);
+    }
+
+    /* MENU MOBILE */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8em;
+      color: var(--light-text);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-links.active {
+      display: flex;
+      flex-direction: column;
+      background: rgba(15, 18, 35, 0.95);
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+      gap: 15px;
     }
 
     /* HEADER */
@@ -132,7 +151,6 @@
       position: relative;
     }
 
-    /* LOGO FLOTANTE HEADER */
     .header-logo {
       position: absolute;
       top: 50%;
@@ -229,37 +247,25 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .hidden {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.9s ease-out;
-    }
-    .visible {
-      opacity: 1;
-      transform: translateY(0);
+    .hidden { opacity: 0; transform: translateY(40px); transition: all 0.9s ease-out; }
+    .visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header h1 { font-size: 3em; }
+      header p { font-size: 1.1em; }
+      .section-title { font-size: 2em; }
+      .section-text p { font-size: 1em; }
+      section { padding: 80px 15px; }
     }
 
-    @media (max-width: 800px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-left {
-        margin-bottom: 10px;
-      }
-      header h1 {
-        font-size: 3em;
-      }
-      section {
-        flex-direction: column;
-      }
-      .section-title {
-        text-align: center;
-      }
-      .header-logo {
-        width: 100px;
-        opacity: 0.15;
-      }
+    @media (max-width: 700px) {
+      nav { padding: 10px 20px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; }
+      header { padding: 150px 15px; }
+      .section-img { width: 100%; }
+      .section-text { text-align: center; }
     }
   </style>
 </head>
@@ -271,10 +277,11 @@
       <img src="img/Logo-removebg.png" alt="Logo Spafo">
       <span class="tagline">Entertainment Lounge</span>
     </div>
-    <div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-links">
       <a href="#cocktail">Cocktail Bar</a>
       <a href="#film">Sala Film</a>
-      <a href="#games">Videogiochi</a>
+      <a href="#games">Game Room</a>
       <a href="#social">Social Room</a>
     </div>
   </nav>
@@ -285,14 +292,12 @@
     <p>Dove la notte incontra l’intrattenimento. Cocktail, cinema, videogiochi e socialità in un’unica esperienza immersiva.</p>
   </header>
 
-  <!-- Sezioni invariate -->
+  <!-- SEZIONI -->
   <section id="cocktail" class="hidden">
     <div class="section-text">
       <h2 class="section-title">Cocktail Bar</h2>
       <div class="section-subtitle">Eleganza & mixology d’autore</div>
-      <p>
-        L’atmosfera del nostro bar è pura eleganza contemporanea: luci soffuse, musica chill e drink d’autore preparati con precisione e creatività.
-      </p>
+      <p>L’atmosfera del nostro bar è pura eleganza contemporanea: luci soffuse, musica chill e drink d’autore preparati con precisione e creatività.</p>
     </div>
     <div class="section-img">
       <img src="img/CocktailBar.png" alt="Cocktail Bar">
@@ -306,25 +311,18 @@
     <div class="section-text">
       <h2 class="section-title">Sala Film</h2>
       <div class="section-subtitle">Cinema privato & relax</div>
-      <p>
-        Un cinema boutique dove il comfort incontra la qualità. 
-        Poltrone comode, maxi schermo e audio avvolgente ti immergono completamente nel film — o nel tuo gioco preferito.
-      </p>
+      <p>Un cinema boutique dove il comfort incontra la qualità. Poltrone comode, maxi schermo e audio avvolgente ti immergono completamente nel film — o nel tuo gioco preferito.</p>
     </div>
   </section>
 
   <section id="games" class="hidden">
     <div class="section-text">
       <h2 class="section-title">Game Room</h2>
-      <div class="section-subtitle">Adrenalina, luci e divertimento</div>
-      <p>
-      Un ambiente dinamico e luminoso dove la competizione incontra lo stile.
-      Tavoli da biliardo, calcio balilla, freccette e canestri si alternano in uno spazio pensato per divertirsi in compagnia, tra risate, sfide e buona musica.
-      La Game Room di Spafo è il cuore dell’energia condivisa: dove ogni partita diventa un’esperienza.
-      </p>
+      <div class="section-subtitle">Sfida & convivialità</div>
+      <p>Un ambiente dinamico e raffinato dove la competizione incontra lo stile. Tavoli da biliardo, calcio balilla, freccette e canestri si alternano in uno spazio pensato per divertirsi tra amici, tra risate e sfide in un’atmosfera unica.</p>
     </div>
     <div class="section-img">
-      <img src="img/GameRoom.png" alt="Sala Videogiochi">
+      <img src="img/GameRoom.png" alt="Game Room">
     </div>
   </section>
 
@@ -335,9 +333,7 @@
     <div class="section-text">
       <h2 class="section-title">Social Lounge</h2>
       <div class="section-subtitle">Connessioni & momenti autentici</div>
-      <p>
-        Spazio conviviale, eventi live, giochi da tavolo e area lounge.
-      </p>
+      <p>Spazio conviviale, eventi live, giochi da tavolo e area lounge: perfetta per rilassarsi, chiacchierare o incontrare nuove persone in un’atmosfera raffinata e accogliente.</p>
     </div>
   </section>
 
@@ -346,6 +342,7 @@
   </footer>
 
   <script>
+    // Animazioni on scroll
     document.addEventListener('DOMContentLoaded', () => {
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver(entries => {
@@ -361,7 +358,11 @@
         observer.observe(sec);
       });
     });
-  </script>
 
+    // Toggle menu mobile
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
